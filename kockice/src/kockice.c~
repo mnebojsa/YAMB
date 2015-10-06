@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "kockice.h"
 #include <inttypes.h>
+<<<<<<< HEAD
 #include <time.h>
 
 
@@ -15,6 +16,22 @@ uint8_t slucajan_br( void )
 	zi=rand()%6+1;
 printf("    unutar funkcije %d\n", zi);								 /* inicijalizuje random generator */	
 	return (uint8_t)zi;	 /* vraca nasumican broj u opsegu vrednosti od 1 do 6 */      
+=======
+#include <unistd.h>
+
+
+uint8_t slucajan_br( void )
+{
+	time_t t;
+   	 static unsigned int zi;
+	
+
+
+	srand((unsigned) time(&t));  
+	zi=rand();		 /* inicijalizuje random generator */
+	sleep(1);
+	return (uint8_t)(((1103515245* zi + 12345) % 2147483648) % 6 + 1);	 /* vraca nasumican broj u opsegu vrednosti od 1 do 6 */      
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 }
 
 
@@ -31,6 +48,7 @@ uint8_t inicijalizujKockice(KOCKICE* ob)
 	return 0;
 }
 
+<<<<<<< HEAD
 
 
 uint8_t bacaj_jednom(KOCKICE* ob)
@@ -99,4 +117,38 @@ void bacaj(KOCKICE* ob)
 		}	
 	}
 	return;
+=======
+
+
+uint8_t bacaj(KOCKICE* ob)
+{
+	uint8_t i;
+	uint8_t j;
+	
+	if(++(ob->br_bacanja) <= 3)
+	{	
+		for(i=0 ; i < broj_kockica; i++)
+		{		
+			if(!ob->kockice[i].zakljucano)
+			{			
+				ob->kockice[i].broj=slucajan_br();
+				
+			}	
+		}
+	}else
+	{
+		return 1;
+	}
+	return 0;
+}
+
+uint8_t ispis_rezultata_bacanja(KOCKICE* ob)
+{
+	uint8_t i;
+	for(i = 0 ; i < broj_kockica ; i++)
+	{
+		printf("\n %d.kockica : %d", i+1, ob->kockice[ob->br_bacanja].broj);	
+	}
+	printf("\n");
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 }

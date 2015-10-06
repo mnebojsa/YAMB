@@ -3,9 +3,12 @@
 
 
 KOCKICE ob;
+<<<<<<< HEAD
 
 /****************************************** jedno_bacanje * testovi *************************************************************
 */
+=======
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 
 TEST_GROUP(bacaj_tests);
 
@@ -16,8 +19,13 @@ TEST_GROUP_RUNNER(bacaj_tests)
 	RUN_TEST_CASE(bacaj_tests , ispravna_inicijalizacija);
 	RUN_TEST_CASE(bacaj_tests , ne_baca_zakljucanu_kockicu);
 	RUN_TEST_CASE(bacaj_tests , sve_kockice_zakljucane);
+<<<<<<< HEAD
 	RUN_TEST_CASE(bacaj_tests , nedozvoljeno_bacanje);
 	
+=======
+	RUN_TEST_CASE(bacaj_tests , dozvoljena_3_bacanja);
+	RUN_TEST_CASE(bacaj_tests , ispis);
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 }
 
 TEST_SETUP(bacaj_tests)
@@ -106,6 +114,7 @@ TEST_TEAR_DOWN(ispis_tests)
 
 // 1. test
 TEST(bacaj_tests , rezultat_sl_br)
+<<<<<<< HEAD
 {
 	uint8_t i;
 	uint8_t pomocna_promenljiva;
@@ -121,6 +130,22 @@ printf("\n br %d ",pomocna_promenljiva);
 TEST(bacaj_tests , ispravna_inicijalizacija)
 {
 	uint8_t i;
+=======
+{
+	uint8_t i;
+	uint8_t pomocna_promenljiva;
+	for(i=0 ; i < 10 ; i++)
+	{
+		pomocna_promenljiva = slucajan_br();			
+		TEST_ASSERT_EQUAL(1, pomocna_promenljiva > 0 && pomocna_promenljiva <= 6);
+	}
+}
+
+// 2. test
+TEST(bacaj_tests , ispravna_inicijalizacija)
+{
+	uint8_t i;
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 	for(i=0 ; i < broj_kockica ; i++)
 	{
 			
@@ -140,7 +165,11 @@ TEST(bacaj_tests , ne_baca_zakljucanu_kockicu)
 	
 	for(i=0 ; i < 10 ; i++)
 	{
+<<<<<<< HEAD
 		bacaj_jednom(&ob);
+=======
+		bacaj(&ob);
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 		TEST_ASSERT_EQUAL(5 , ob.kockice[2].broj);
 	}
 }
@@ -159,7 +188,11 @@ TEST(bacaj_tests , sve_kockice_zakljucane)
 
 	for(i=0 ; i < 10 ; i++)			// 10 pokusaja bacanja zakljucanuih kockica - inicijalizovana vrednost 
 	{					// ne sme biti promenjena
+<<<<<<< HEAD
 		bacaj_jednom(&ob);
+=======
+		bacaj(&ob);
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 		for(j=0 ; j < broj_kockica ; j++)
 		{
 			TEST_ASSERT_EQUAL(5 , ob.kockice[j].broj);
@@ -168,6 +201,7 @@ TEST(bacaj_tests , sve_kockice_zakljucane)
 }
 
 // 5. test
+<<<<<<< HEAD
 
 TEST(bacaj_tests , nedozvoljeno_bacanje)
 {		
@@ -176,10 +210,21 @@ TEST(bacaj_tests , nedozvoljeno_bacanje)
 	for(i=0 ; i < 10 ; i++)
 	{	
 		if(bacaj_jednom(&ob))
+=======
+TEST(bacaj_tests , dozvoljena_3_bacanja)
+{		
+	uint8_t i;
+	
+	
+	for(i=0 ; i < 10 ; i++)
+	{	
+		if(!bacaj(&ob))
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 		{
 			TEST_ASSERT_EQUAL(1 , ob.br_bacanja <= 3);
 		}else
 		{
+<<<<<<< HEAD
 			TEST_ASSERT_EQUAL(0 , ob.br_bacanja <= 3);
 			printf("\n nedozvoljeno bacanje kockica \n");		
 		}	
@@ -219,6 +264,10 @@ TEST(zakljucaj_tests , ispravno_otkljucane_kockice)
 	for(i=0 ; i < broj_kockica ; i++)	
 	{					
 	ob.kockice[i].zakljucano =1;
+=======
+			printf("\n nedozvoljeno bacanje kockica \n");		
+		}	
+>>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 	}
 
 	zakljucaj(&ob, kockica_koju_otkljucavamo);
@@ -269,5 +318,24 @@ TEST(ispis_tests , ispis)
 			
 	
 }
+
+// 6. test
+TEST(bacaj_tests , ispis)
+{		
+	uint8_t i;
+	
+	
+	//for(i=0 ; i < 10 ; i++)
+	{	
+		bacaj(&ob);
+for (i=0; i< 5 ; i ++) printf(" . . %d ", ob.kockice[i].broj);
+		ispis_rezultata_bacanja(&ob);
+	}
+		
+	TEST_ASSERT_EQUAL(0 , 0);
+			
+	
+}
+
 
 
