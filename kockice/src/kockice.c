@@ -2,41 +2,101 @@
 #include <stdlib.h>
 #include "kockice.h"
 #include <inttypes.h>
+#include <time.h>
 
 
-void kreirajKockice(KOCKICE* ob)
+////    !!!!!!!!!!!!!!!!!!!!!!      ne radi slucajan broj
+
+uint8_t slucajan_br( void )
+{
+   	static unsigned long zi;
+	
+	srand( NULL );  
+	zi=rand()%6+1;
+printf("    unutar funkcije %d\n", zi);								 /* inicijalizuje random generator */	
+	return (uint8_t)zi;	 /* vraca nasumican broj u opsegu vrednosti od 1 do 6 */      
+}
+
+
+uint8_t inicijalizujKockice(KOCKICE* ob)
 {
 	uint8_t i;
 	for(i=0 ; i < broj_kockica ; i++)
 	{
-		ob[i]->broj=0;
-		ob[i]->zakljucano=0;	
+		ob->kockice[i].broj=0;
+		ob->kockice[i].zakljucano=0;	
 	}
+	ob->br_bacanja=0;
 	
-	return;
+	return 0;
 }
 
-static uint8_t slucajan_br( void )
-{
 
-	time_t t;
-   
-   /* Intializes random number generator */
-	srand((unsigned) time(&t));
 
-   /* Print 5 random numbers from 0 to 49 */
-  
-      return (uint8_t)(rand() % 6 + 1);
-}
-
-void baci(KOCKICE* kocke)
+uint8_t bacaj_jednom(KOCKICE* ob)
 {
 	uint8_t i;
+	uint8_t j;
 	
-	for(i=0 ; i < broj_kockica; i++)
+	if(++(ob->br_bacanja) <= 3)
+	{	
+		for(i=0 ; i < broj_kockica; i++)
+		{		
+			if(!ob->kockice[i].zakljucano)
+			{			
+				ob->kockice[i].broj=slucajan_br();
+				
+			}else
+			{
+				ob->kockice[i].broj=ob->kockice[i].broj;
+			}	
+		}
+		return 1;
+	}else
 	{
-		kocke[i]->broj=slucajan_br();
-	}	
+		return 0;
+	}
+}
 
+
+uint8_t ispis_rezultata_bacanja(const KOCKICE* ob)
+{
+	uint8_t i;
+	for(i = 0 ; i < broj_kockica ; i++)
+	{
+		printf("\n %d.kockica : %d", i+1, ob->kockice[i].broj);	
+	}
+	printf("\n");
+}
+
+uint8_t zakljucaj(KOCKICE* ob, uint8_t kockica_koju_zakljucavamo)
+{
+	if(ob->kockice[kockica_koju_zakljucavamo].zakljucano==0)	
+	{
+		ob->kockice[kockica_koju_zakljucavamo].zakljucano=1;	
+	}else
+	{
+		ob->kockice[kockica_koju_zakljucavamo].zakljucano=0;	
+	}
+	return 1;
+}
+
+void bacaj(KOCKICE* ob)
+{
+	uint8_t kockica_koju_zakljucavamo;
+	uint8_t i;
+
+	for(i = 0 ; i < max_br_bacanja; i++)
+	{
+		bacaj_jednom(ob);
+		ispis_rezultata_bacanja(ob);
+		kockica_koju_zakljucavamo=55;    //samo da bude ostvaren uslov za while
+		while(kockica_koju_zakljucavamo)
+		{
+			printf("zakljucaj/otkljucaj kockicu :");
+			scanf("%"SCNd8 , &kockica_koju_zakljucavamo);		
+			zakljucaj(ob,kockica_koju_zakljucavamo-1);	
+		}	
+	}
 	return;
 }

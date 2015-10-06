@@ -11,32 +11,42 @@
 #include <inttypes.h>
 
 #define broj_kockica 5
+#define max_br_bacanja 3
 
-
-typedef struct Kockice
+typedef struct
 {
-	uint8_t broj;
-	uint8_t zakljucano;
+	struct Kockica
+	{
+		uint8_t broj;
+		uint8_t zakljucano;
 
-}KOCKICE[broj_kockica];
+	}kockice[broj_kockica];
+	
+	uint8_t br_bacanja;
+		
+}KOCKICE;
 
 //pomocne funkcije
 /***************************************************************************************************
 */
 
 
-static uint8_t slucajan_br( void );
+uint8_t slucajan_br( void );
 
 
 //korisnicke funkcije
 /***************************************************************************************************
 */
 
-void kreirajKockice(KOCKICE* );
+uint8_t inicijalizujKockice(KOCKICE* ob);
 
-void baci(KOCKICE* );
+uint8_t bacaj_jednom(KOCKICE* ob);
 
+uint8_t ispis_rezultata_bacanja(const KOCKICE* ob);
 
+uint8_t zakljucaj(KOCKICE* ob, uint8_t kockica_koju_zakljucavamo);
+
+void bacaj(KOCKICE* ob);
 
 #endif
 

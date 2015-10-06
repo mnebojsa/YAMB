@@ -2,8 +2,10 @@
 
 static void RunAllTests(void)
 {
-	RUN_TEST_GROUP(bacaj);
-	
+	RUN_TEST_GROUP(bacaj_tests);
+	TEST_GROUP_RUNNER(zakljucaj_tests);
+	TEST_GROUP_RUNNER(bacanja_runda_tests);
+	TEST_GROUP_RUNNER(ispis_tests);
 }
 
 int main(int argc, char *argv[])
