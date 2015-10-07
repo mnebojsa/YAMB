@@ -1,5 +1,5 @@
 #include "../../unity/unity_fixture.h"
-#include "../src/kockice.h"
+#include "../src/listic.h"
 
 
 KOCKICE ob;
@@ -109,7 +109,6 @@ TEST(bacaj_tests , rezultat_sl_br)
 {
 	uint8_t i;
 	uint8_t pomocna_promenljiva;
-	
 	for(i=0 ; i < 10 ; i++)
 	{
 		pomocna_promenljiva = slucajan_br();
@@ -246,7 +245,7 @@ TEST(bacanja_runda_tests , rezultat_runde)
 	bacaj(&ob);
 	for(i = 0 ; i < broj_kockica ; i++ )
 	{
-		TEST_ASSERT_EQUAL(1 , ob.rezultat_bacanja[i] == ob.kockice[i].broj );
+		TEST_ASSERT_EQUAL(1 , rezultat_bacanja[i] == ob.kockice[i].broj );
 	}
 }
 

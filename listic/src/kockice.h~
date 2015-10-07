@@ -13,8 +13,6 @@
 #define broj_kockica 5
 #define max_br_bacanja 3
 
-uint8_t rezultat_bacanja[broj_kockica];
-
 typedef struct
 {
 	struct Kockica
@@ -28,6 +26,7 @@ typedef struct
 		
 }KOCKICE;
 
+uint8_t rezultat_bacanja[broj_kockica];
 
 //pomocne funkcije
 /***************************************************************************************************

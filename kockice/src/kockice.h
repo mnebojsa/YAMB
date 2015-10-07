@@ -19,22 +19,13 @@ typedef struct
 	{
 		uint8_t broj;
 		uint8_t zakljucano;
-<<<<<<< HEAD
 
 	}kockice[broj_kockica];
 	
 	uint8_t br_bacanja;
-		
-}KOCKICE;
-=======
-
-	}kockice[broj_kockica];
-	
-	uint8_t br_bacanja;
-		
+	uint8_t rezultat_bacanja[broj_kockica];	
 }KOCKICE;
 
->>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 
 //pomocne funkcije
 /***************************************************************************************************
@@ -49,19 +40,12 @@ uint8_t slucajan_br( void );
 */
 
 uint8_t inicijalizujKockice(KOCKICE* ob);
-<<<<<<< HEAD
 
 uint8_t bacaj_jednom(KOCKICE* ob);
 
 uint8_t ispis_rezultata_bacanja(const KOCKICE* ob);
 
 uint8_t zakljucaj(KOCKICE* ob, uint8_t kockica_koju_zakljucavamo);
-=======
-
-uint8_t bacaj(KOCKICE* ob);
-
-uint8_t ispis_rezultata_bacanja(KOCKICE* ob);
->>>>>>> 69cb6fbc0d09b13d2a641d01fdde49d4b5f73055
 
 void bacaj(KOCKICE* ob);
 

@@ -3,12 +3,15 @@
 #include "kockice.h"
 #include <inttypes.h>
 
-	
+
+////    !!!!!!!!!!!!!!!!!!!!!!      ne radi slucajan broj
+
 uint8_t slucajan_br( void )
 {
+	time_t t;
+	static int zi;
 	
-	int zi;
-			/* inicijalizuje random generator */
+	srand((unsigned) time(&t));		/* inicijalizuje random generator */
  	zi=rand() %6 +1;	
 	return (uint8_t)zi;		        /* vraca nasumican broj u opsegu vrednosti od 1 do 6 */      
 }
@@ -17,8 +20,6 @@ uint8_t slucajan_br( void )
 uint8_t inicijalizujKockice(KOCKICE* ob)
 {
 	uint8_t i;
-	srand((unsigned) time(NULL));
-
 	for(i=0 ; i < broj_kockica ; i++)
 	{
 		ob->kockice[i].broj=0;
@@ -98,7 +99,7 @@ void bacaj(KOCKICE* ob)
 	}
 	for(i = 0 ; i < broj_kockica; i++)
 	{
-		ob->rezultat_bacanja[i]=ob->kockice[i].broj;
+		rezultat_bacanja[i]=ob->kockice[i].broj;
 	}
 	return;
 }
